@@ -1,5 +1,5 @@
 Link for images:
-https://drive.google.com/drive/folders/1WJlGCeJlCJ5aq1gAqKDN2b0mJzO43KdU?usp=sharing
+https://drive.google.com/drive/folders/1-1KvulXM4FEKD2qO6etudgtRfiy4ZTsw?usp=sharing
 
-We attain structured data from:
-https://github.com/TimDettmers/ConvE
+We attain movielens-100k from:
+http://files.grouplens.org/datasets/movielens/
