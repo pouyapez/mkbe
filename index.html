@@ -77,7 +77,7 @@
     <table class="content-table">
       <tr>
         <td>
-          <img class="left-align image noselect" src="img/graph.pdf" width="410">
+          <img class="left-align image noselect" src="img/graph.pdf" width="420">
         </td>
         <td>
           <p class="text text-large add-top-margin" style="margin-left: 80px;">
@@ -184,7 +184,7 @@
       </tr>
       <tr>
         <td colspan="2">
-          <h2 class="add-top-margin">Simple Imputing Attributes Experiment</h2>
+          <h2 class="add-top-margin">Demo</h2>
           <hr>
           <p class="text"  align="justify">
             Here we study generating missing attributes from knowleddge graph representation. Accordingly, we consider an imagineray 
@@ -194,7 +194,7 @@
                  <p>Please select the links:</p>
    <form>
       <div class="left-align">
-          <input type="radio" id="sport" name="occ" value="sport" onClick="myupdate();"/>
+          <input type="radio" id="sport" name="occ" value="sport" onClick="myupdate();" checked />
                 Plays for FC Barcelona <br> 
           <input type="radio" id="celebrity" name="occ" value="celebrity" onClick="myupdate();"/>
                 Acted in Godfather <br> 
@@ -202,7 +202,7 @@
                 Is politician of Germany
        </div>
       <div class="middle-align">
-          <input type="radio" id="male" name="gender" value="male" onClick="myupdate();"/>
+          <input type="radio" id="male" name="gender" value="male" onClick="myupdate();" checked />
                 Has gender male <br> 
           <input type="radio" id="female" name="gender" value="female" onClick="myupdate();"/>
                 Has gender female
@@ -216,7 +216,7 @@
             <img id="image_femalesport" src="img/f-sp.png" width="200" style="display: none;" align="left">
             <img id="image_femalepolitician" src="img/f-pol.png" width="200" style="display: none;" align="left">
             <img id="image_femalecelebrity" src="img/f-celeb.png" width="200" style="display: none;" align="left">
-            <img id="image_malesport" src="img/m-sp.png" width="200" style="display: none;" align="left">
+            <img id="image_malesport" src="img/m-sp.png" width="200" align="left">
             <img id="image_malepolitician" src="img/m-pol.png" width="200" style="display: none;" align="left">
             <img id="image_malecelebrity" src="img/m-celeb.png" width="200" style="display: none;" align="left">
          </div>
@@ -231,7 +231,7 @@
           <div class="right-align" id="text_femalecelebrity" style="display: none;">
             subject <oov> is an Indian model with <oov> Cohen. 
          </div>
-         <div class="right-align" id="text_malesport" style="display: none;">
+         <div class="right-align" id="text_malesport">
             subject (born 4 August 1986) is a Polish footballer who plays for GKS Academical. 
          </div>
          <div class="right-align" id="text_malepolitician" style="display: none;">
