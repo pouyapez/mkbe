@@ -1,2 +1,2 @@
 Website for MKBE paper:
-https://pouyapez.github.io/M-KBE/
+https://pouyapez.github.io/mkbe/
