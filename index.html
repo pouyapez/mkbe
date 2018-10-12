@@ -126,8 +126,8 @@
             the subject (Carles Puyol) and the relation (such as playsFor, wasBornOn, or playsFor) using a direct lookup. For 
             the object, depending on the domain (indexed, string, numerical, or image, respectively), we use appropriate encoders 
             to compute its embedding. Via these neural encoders, the model can use the information content of multimodal objects to 
-            predict missing links, however, learning embeddings for objects in $\M$ is not sufficient to generate missing 
-            multimodal values, i.e. $\langle s, r, ?\rangle$ where the object is in $\M$.Consequently, we introduce a set 
+            predict missing links, however, learning embeddings for objects in M (multimodal attributes) is not sufficient to generate missing 
+            multimodal values, i.e. < s, r, ? > where the object is in M. Consequently, we introduce a set 
             of neural decoders that use entity embeddings to generate multimodal values. An outline of our model for imputing 
             missing values is depicted in the above figure.   
           </p>
