@@ -36,6 +36,39 @@
       }
 
     }
+      
+    function myupdate_movie() {
+     
+      list = ["action1990","drama1990","action2005","drama2005","animation1990","animation2005"];
+        
+      if (document.getElementById('action').checked) {
+      genre_value = document.getElementById('action').value;
+      }
+      if (document.getElementById('drama').checked) {
+      genre_value = document.getElementById('drama').value;
+      }
+      if (document.getElementById('animation').checked) {
+      genre_value = document.getElementById('animation').value;
+      }
+      if (document.getElementById('1990').checked) {
+      date_value = document.getElementById('1990').value;
+      }
+      if (document.getElementById('2005').checked) {
+      date_value = document.getElementById('2005').value;
+      }
+
+      ov_value = genre_value.concat(date_value);
+      
+      for (x in list) {
+      if (ov_value!=list[x]){
+         document.getElementById("text_".concat(list[x])).style.display = "none";
+      }
+         else{
+          document.getElementById("text_".concat(list[x])).style.display = "";  
+         }
+      }
+
+    }
    function mytest() {
            alert("Hello world!");
    }
@@ -243,7 +276,56 @@
         </td>
        </tr>
        
-       
+   <tr>
+    <td colspan="2">     
+     <h2 class="add-top-margin">Demo Movilens</h2>
+          <hr>
+          <p class="text"  align="justify">
+            Similar to previous section, here we consider an imagineray 
+            movie with only two relations, the genre and release date. Then using learned embeddings of graph, we calculate the embedding
+            of this entity and using this embedding as conditional information we generate a title for this movie.
+          </p>
+                 <p>Please select the links:</p>
+   <form>
+      <div class="left-align">
+          <input type="radio" id="action" name="genere" value="action" onClick="myupdate();" checked />
+                Action <br> 
+          <input type="radio" id="drama" name="genre" value="drama" onClick="myupdate();"/>
+                Drama <br> 
+           <input type="radio" id="comedy" name="genre" value="comedy" onClick="myupdate();"/>
+                Comedy
+       </div>
+      <div class="middle-align">
+          <input type="radio" id="1995" name="date" value="1995" onClick="myupdate();" checked />
+                Released on 1995 <br> 
+          <input type="radio" id="1997" name="date" value="1997" onClick="myupdate();"/>
+                Released on 1995
+      </div>
+   </form>
+         
+       </tr>
+       <tr>
+        <td>  
+         <div class="right-align" id="text_action1997" style="display: none;">
+           Hot Death Boys
+         </div>
+         <div class="right-align" id="text_drama1995" style="display: none;">
+           A Heaven's Mallrats
+         </div>
+          <div class="right-align" id="text_drama1997" style="display: none;">
+            Blood Measures 
+         </div>
+         <div class="right-align" id="text_action1995">
+            Double Game
+         </div>
+         <div class="right-align" id="text_comedy1995" style="display: none;">
+           Nixon World
+         </div>
+         <div class="right-align" id="text_comedy1997" style="display: none;">
+            Dracula Evil Story 
+         </div>
+        </td>
+       </tr>         
        
 
       <tr>
