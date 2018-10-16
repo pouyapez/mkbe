@@ -39,7 +39,7 @@
       
     function myupdate_movie() {
      
-      list = ["action1995","drama1995","action1997","drama1997","comedy1995","comedy1997"];
+      list = ["action1","drama1","action5","drama5","comedy1","comedy5"];
         
       if (document.getElementById('action').checked) {
       genre_value = document.getElementById('action').value;
@@ -50,11 +50,11 @@
       if (document.getElementById('comedy').checked) {
       genre_value = document.getElementById('comedy').value;
       }
-      if (document.getElementById('1995').checked) {
-      date_value = document.getElementById('1995').value;
+      if (document.getElementById('1').checked) {
+      date_value = document.getElementById('1').value;
       }
-      if (document.getElementById('1997').checked) {
-      date_value = document.getElementById('1997').value;
+      if (document.getElementById('5').checked) {
+      date_value = document.getElementById('5').value;
       }
 
       ov_value = genre_value.concat(date_value);
@@ -296,33 +296,33 @@
                 Comedy
        </div>
       <div class="middle-align">
-          <input type="radio" id="1995" name="date" value="1995" onClick="myupdate_movie();" checked />
-                Released on 1995 <br> 
-          <input type="radio" id="1997" name="date" value="1997" onClick="myupdate_movie();"/>
-                Released on 1997
+          <input type="radio" id="1" name="date" value="1" onClick="myupdate_movie();" checked />
+                Has rating 1 <br> 
+          <input type="radio" id="5" name="date" value="5" onClick="myupdate_movie();"/>
+                Has rating 5
       </div>
    </form>
          
        </tr>
        <tr>
         <td>  
-         <div class="right-align" id="text_action1997" style="display: none;">
-           Hot Death Boys
+         <div class="right-align" id="text_action1" style="display: none;">
+           Assassination of the Videotape
          </div>
-         <div class="right-align" id="text_drama1995" style="display: none;">
-           A Heaven's Mallrats
+         <div class="right-align" id="text_drama1" style="display: none;">
+           The Tin and the Langoliers
          </div>
-          <div class="right-align" id="text_drama1997" style="display: none;">
-            Blood Measures 
+          <div class="right-align" id="text_comedy1" style="display: none;">
+            Dracula Evil Story 
          </div>
-         <div class="right-align" id="text_action1995">
+         <div class="right-align" id="text_action5">
             Double Game
          </div>
-         <div class="right-align" id="text_comedy1995" style="display: none;">
+         <div class="right-align" id="text_comedy5" style="display: none;">
            Nixon World
          </div>
-         <div class="right-align" id="text_comedy1997" style="display: none;">
-            Dracula Evil Story 
+         <div class="right-align" id="text_comedy5" style="display: none;">
+            Blood Measures
          </div>
         </td>
        </tr>         
