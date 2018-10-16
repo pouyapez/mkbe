@@ -39,7 +39,7 @@
       
     function myupdate_movie() {
      
-      list = ["action1990","drama1990","action2005","drama2005","animation1990","animation2005"];
+      list = ["action1995","drama1995","action1997","drama1997","comedy1995","comedy1997"];
         
       if (document.getElementById('action').checked) {
       genre_value = document.getElementById('action').value;
@@ -47,14 +47,14 @@
       if (document.getElementById('drama').checked) {
       genre_value = document.getElementById('drama').value;
       }
-      if (document.getElementById('animation').checked) {
-      genre_value = document.getElementById('animation').value;
+      if (document.getElementById('comedy').checked) {
+      genre_value = document.getElementById('comedy').value;
       }
-      if (document.getElementById('1990').checked) {
-      date_value = document.getElementById('1990').value;
+      if (document.getElementById('1995').checked) {
+      date_value = document.getElementById('1995').value;
       }
-      if (document.getElementById('2005').checked) {
-      date_value = document.getElementById('2005').value;
+      if (document.getElementById('1997').checked) {
+      date_value = document.getElementById('1997').value;
       }
 
       ov_value = genre_value.concat(date_value);
@@ -288,17 +288,17 @@
                  <p>Please select the links:</p>
    <form>
       <div class="left-align">
-          <input type="radio" id="action" name="genere" value="action" onClick="myupdate();" checked />
+          <input type="radio" id="action" name="genre" value="action" onClick="myupdate_movie();" checked />
                 Action <br> 
-          <input type="radio" id="drama" name="genre" value="drama" onClick="myupdate();"/>
+          <input type="radio" id="drama" name="genre" value="drama" onClick="myupdate_movie();"/>
                 Drama <br> 
-           <input type="radio" id="comedy" name="genre" value="comedy" onClick="myupdate();"/>
+           <input type="radio" id="comedy" name="genre" value="comedy" onClick="myupdate_movie();"/>
                 Comedy
        </div>
       <div class="middle-align">
-          <input type="radio" id="1995" name="date" value="1995" onClick="myupdate();" checked />
+          <input type="radio" id="1995" name="date" value="1995" onClick="myupdate_movie();" checked />
                 Released on 1995 <br> 
-          <input type="radio" id="1997" name="date" value="1997" onClick="myupdate();"/>
+          <input type="radio" id="1997" name="date" value="1997" onClick="myupdate_movie();"/>
                 Released on 1995
       </div>
    </form>
