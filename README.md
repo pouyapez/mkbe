@@ -3,7 +3,7 @@
 This repository is the implementation for the paper 
 "[Embedding Multimodal Relational Data for Knowledge Base Completion](https://arxiv.org/abs/1809.01341)"
 
-The code is devided into three folders corresponding to each section. 
+The code is devided into four folders corresponding to each section. 
 The depedencies and runtime requirements are specified in the **README** for each folder.
 
 ## Project Page & Demo
