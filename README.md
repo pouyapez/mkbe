@@ -6,10 +6,6 @@ This repository is the implementation for the paper
 The code is devided into three folders corresponding to each section. 
 The depedencies and runtime requirements are specified in the **README** for each folder.
 
-## Dataset
-
-The Dataset can be downloaded from [Here](https://github.com/pouyapez/mkbe)
-
 ## Project Page & Demo
 
 For more information and the demo, please refer to our [project page](https://pouyapez.github.io/mkbe/)
