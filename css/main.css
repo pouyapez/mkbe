@@ -15,7 +15,7 @@ a {
 .menu-container {
   z-index: 2;
   position: relative;
-  width: 80%;
+  width: 100%;
   background-color: #212121;
 }
 
