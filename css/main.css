@@ -311,7 +311,7 @@ ol.publication.P-list li:before {
   left: 0;
   height: auto;
   width: 100%;
-  min-width: 9400px;
+  min-width: 800px;
 }
 
 .iframe {
