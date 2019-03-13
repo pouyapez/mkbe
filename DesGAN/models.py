@@ -21,10 +21,10 @@ class MLP_D(nn.Module):
         self.layers = []
 
         for i in range(len(layer_sizes)-1):
-	    ##if i==0: ## kolan in sharto ezafe kardam
-            ##    layer = nn.Linear(layer_sizes[i]+199, layer_sizes[i+1])
-	    #else:
-            layer = nn.Linear(layer_sizes[i], layer_sizes[i+1])
+	    if i==0: ## kolan in sharto ezafe kardam
+                layer = nn.Linear(layer_sizes[i]+199, layer_sizes[i+1])
+	    else:
+            	layer = nn.Linear(layer_sizes[i], layer_sizes[i+1])
 	    self.layers.append(layer)
             self.add_module("layer"+str(i+1), layer)
 
@@ -37,25 +37,19 @@ class MLP_D(nn.Module):
             self.layers.append(activation)
             self.add_module("activation"+str(i+1), activation)
 
-        layer = nn.Linear(layer_sizes[-1], noutput)###layer_sizes[-1]+199 vase last layer
+        layer = nn.Linear(layer_sizes[-1], noutput)
         self.layers.append(layer)
         self.add_module("layer"+str(len(self.layers)), layer)
 
         self.init_weights()
 
-    def forward(self, x, c):## (self, x, c) or (self, x) 
+    def forward(self, x, c):
         for i, layer in enumerate(self.layers):
-	    ##if i==0: ## ezaf shode 
-		##x = torch.cat((x, c), 1)## ezaf shode
+	    if i==0:
+		x = torch.cat((x, c), 1)
             x = layer(x)
-	    #if i==4: ## ezaf shode 
-	#	x = torch.cat((x, c), 1)## ezaf shode
-	    #print i, x.size()
-	#y = torch.mean(torch.sign(x))
 	y = torch.mean(torch.sigmoid(x))
 	x = torch.mean(x)
-	#print x
-	#print y
         return x, y
 
     def init_weights(self):
@@ -266,7 +260,6 @@ class Seq2Seq(nn.Module):
 
         embedding = self.embedding_decoder(self.start_symbols)
         inputs = torch.cat([embedding, hidden.unsqueeze(1)], 2) ### 
-	#print(embedding.shape, hidden.unsqueeze(1).shape,  batch_size)	
 
         # unroll
         all_indices = []
