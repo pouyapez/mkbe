@@ -17,17 +17,12 @@ from torch.autograd import Variable
 from utils import to_gpu, Corpus, batchify, train_ngram_lm, get_ppl, batchify_C
 from models import Seq2Seq, MLP_D, MLP_G
 
-######################
-#torch.backends.cudnn.enabled=False
-#torch.cuda.set_device(0)
-######################
-
 
 parser = argparse.ArgumentParser(description='PyTorch ARAE for Text')
 # Path Arguments
 parser.add_argument('--data_path', type=str, required=True,
                     help='location of the data corpus')
-parser.add_argument('--kenlm_path', type=str, default='./kenlm', ##../Data/kenlm -> ./kenlm
+parser.add_argument('--kenlm_path', type=str, default='./kenlm', 
                     help='path to kenlm directory')
 parser.add_argument('--outf', type=str, default='example',
                     help='output directory name')
@@ -42,9 +37,9 @@ parser.add_argument('--lowercase', action='store_true',
                     help='lowercase all text')
 
 # Model Arguments
-parser.add_argument('--emsize', type=int, default=300, ## 300 ->100  vase title 50 bood
+parser.add_argument('--emsize', type=int, default=300, 
                     help='size of word embeddings')
-parser.add_argument('--nhidden', type=int, default=300,## 300 ->100  vase title 50 bood
+parser.add_argument('--nhidden', type=int, default=300,
                     help='number of hidden units per layer')
 parser.add_argument('--nlayers', type=int, default=1,
                     help='number of layers')
@@ -55,11 +50,11 @@ parser.add_argument('--noise_anneal', type=float, default=0.995,
                          'every 100 iterations')
 parser.add_argument('--hidden_init', action='store_true',
                     help="initialize decoder hidden state with encoder's")
-parser.add_argument('--arch_g', type=str, default='300-300', ## 300-300 -> 100-100  vase title '50-50' bood
+parser.add_argument('--arch_g', type=str, default='300-300', 
                     help='generator architecture (MLP)')
-parser.add_argument('--arch_d', type=str, default='300-300', ## 300-300 -> 100-100  vase title '50-50' bood
+parser.add_argument('--arch_d', type=str, default='300-300', 
                     help='critic/discriminator architecture (MLP)')
-parser.add_argument('--z_size', type=int, default=199,      #### 100 -> 200, 399, 319
+parser.add_argument('--z_size', type=int, default=199,     
                     help='dimension of random noise z to feed into generator')
 parser.add_argument('--temp', type=float, default=1,
                     help='softmax temperature (lower --> more discrete)')
@@ -71,9 +66,9 @@ parser.add_argument('--dropout', type=float, default=0.0,
                     help='dropout applied to layers (0 = no dropout)')
 
 # Training Arguments
-parser.add_argument('--epochs', type=int, default=15, ##### 15 -> 60
+parser.add_argument('--epochs', type=int, default=15, 
                     help='maximum number of epochs')
-parser.add_argument('--min_epochs', type=int, default=6,  #### 6 -> 50 ######################
+parser.add_argument('--min_epochs', type=int, default=6,  
                     help="minimum number of epochs to train for")
 parser.add_argument('--no_earlystopping', action='store_true',
                     help="won't use KenLM for early stopping")
@@ -82,24 +77,22 @@ parser.add_argument('--patience', type=int, default=5,
                          "improvement to wait before early stopping")
 parser.add_argument('--batch_size', type=int, default=64, metavar='N',
                     help='batch size')
-parser.add_argument('--niters_ae', type=int, default=1,######## 1 -> 5
+parser.add_argument('--niters_ae', type=int, default=1,
                     help='number of autoencoder iterations in training')
-parser.add_argument('--niters_gan_d', type=int, default=5,  ####### 5 -> 1
+parser.add_argument('--niters_gan_d', type=int, default=5,  
                     help='number of discriminator iterations in training')
-parser.add_argument('--niters_gan_g', type=int, default=1, ##### 1 -> 0
+parser.add_argument('--niters_gan_g', type=int, default=1, 
                     help='number of generator iterations in training')
-#parser.add_argument('--niters_gan_l', type=int, default=5,  ###################################################
-#                    help='number of generator L1 iterations in training')
 parser.add_argument('--niters_gan_schedule', type=str, default='2-4-6',
                     help='epoch counts to increase number of GAN training '
                          ' iterations (increment by 1 each time)')
-parser.add_argument('--lr_ae', type=float, default=1, #### 1 ->5e-03 
+parser.add_argument('--lr_ae', type=float, default=1,  
                     help='autoencoder learning rate')
-parser.add_argument('--lr_gan_g', type=float, default=5e-05, ### 5e-05 -> 5e-10
+parser.add_argument('--lr_gan_g', type=float, default=5e-05, 
                     help='generator learning rate')
-parser.add_argument('--lr_gan_d', type=float, default=1e-05, ### 1e-05 -> 1e-10
+parser.add_argument('--lr_gan_d', type=float, default=1e-05, 
                     help='critic/discriminator learning rate')
-parser.add_argument('--lr_ae_l', type=float, default=5e-03, #### 1 ->5e-03 
+parser.add_argument('--lr_ae_l', type=float, default=5e-03, 
                     help='autoencoder l1 rate')
 parser.add_argument('--lr_gan_l', type=float, default=5e-03,
                     help='l1 learning rate')
@@ -169,16 +162,16 @@ with open("./output/{}/logs.txt".format(args.outf), 'w') as f:
 
 eval_batch_size = 10
 test_data = batchify(corpus.test, eval_batch_size, shuffle=False)
-train_data = batchify(corpus.train, args.batch_size, shuffle=False) ##### True -> False
+train_data = batchify(corpus.train, args.batch_size, shuffle=False)
 
 
 #load conditonal information
-test_C = np.load('test_weight-YAGO-S.npy')#('test_weight-all.npy')
-train_C = np.load('train_weight-YAGO-S.npy')#('train_weight-all.npy')
+test_C = np.load('data/test_weight-YAGO.npy')
+train_C = np.load('data/train_weight-YAGO.npy')
 
-test_ol = np.load('test_weight-all.npy')#('test_weight-all.npy')
+#test_ol = np.load('test_weight-all.npy')#('test_weight-all.npy')
 
-test_C = preprocessing.normalize(test_C, norm='l2')#### shayad nakoni behtar bashe
+test_C = preprocessing.normalize(test_C, norm='l2')
 train_C = preprocessing.normalize(train_C, norm='l2')
 
 test_c = batchify_C(test_C, eval_batch_size, shuffle=False)
@@ -325,13 +318,12 @@ def train_lm(test, eval_path, save_path):#####(test, eval_path, save_path) or (e
     indices = []
     noise = to_gpu(args.cuda, Variable(torch.ones(100, args.z_size)))
     
-    test = to_gpu(args.cuda, Variable(test[0][0])) ##
-#    print type(test), len(test), len(test[0]), len(test[0][0])
+    test = to_gpu(args.cuda, Variable(test[0][0]))
 
-    for i in range(1):  ### 1 vase condition, 30 halat avalie
+    for i in range(1):  
         noise.data.normal_(0, 1)
 
-        fake_hidden = gan_gen(test)####(test)####(noise)
+        fake_hidden = gan_gen(test)
         max_indices = autoencoder.generate(fake_hidden, args.maxlen)
         indices.append(max_indices.data.cpu().numpy())
 
@@ -436,10 +428,9 @@ def train_gan_l(batch, batch2):##(batch2) or ()
                    Variable(torch.ones(args.batch_size, args.z_size)))
     noise.data.normal_(0, 1)
 	
-    #print len(noise), len(noise[0])
-    batch_C = to_gpu(args.cuda, Variable(batch2[0])) ###
+    batch_C = to_gpu(args.cuda, Variable(batch2[0])) 
 
-    fake_hidden = gan_gen(batch_C)###(batch_C)###(noise)
+    fake_hidden = gan_gen(batch_C)
 
 ########## l1 loss
     source, target, lengths = batch
@@ -463,26 +454,13 @@ def train_gan_g(batch, batch2):##(batch2) or ()
                    Variable(torch.ones(args.batch_size, args.z_size)))
     noise.data.normal_(0, 1)
 	
-    #print len(noise), len(noise[0])
-    batch_C = to_gpu(args.cuda, Variable(batch2[0])) ###
+    batch_C = to_gpu(args.cuda, Variable(batch2[0])) 
 
-    fake_hidden = gan_gen(batch_C)###(batch_C)###(noise)
-    errG, y = gan_disc(fake_hidden, batch_C)## (fake_hidden, batch_C) or (fake_hidden) 
+    fake_hidden = gan_gen(batch_C)
+    errG, y = gan_disc(fake_hidden, batch_C) 
 
     # loss / backprop
-    errG.backward(one)#######(one)
-
-
-########## l1 loss
-    #source, target, lengths = batch
-    #source = to_gpu(args.cuda, Variable(source))
-    #target = to_gpu(args.cuda, Variable(target))
-
-    ### batch_size x nhidden
-    #real_hidden = autoencoder(source, lengths, noise=False, encode_only=True)
-    #err_l = torch.mean(torch.abs(fake_hidden - real_hidden))
-    #err_l.backward( )
-##########
+    errG.backward(one)
 
     optimizer_gan_g.step()
 
@@ -527,9 +505,8 @@ def train_gan_d(batch, batch2):###(batch, batch2) or (batch)
     batch_C = to_gpu(args.cuda, Variable(batch2[0]))
 
     # loss / backprop
-    errD_real, y1 = gan_disc(real_hidden, batch_C)## (real_hidden, batch_C) or (real_hidden) 
-    #print errD_real
-    errD_real.backward(one)##############(one)
+    errD_real, y1 = gan_disc(real_hidden, batch_C)
+    errD_real.backward(one)
 
     # negative samples ----------------------------
     # generate fake codes
@@ -537,23 +514,10 @@ def train_gan_d(batch, batch2):###(batch, batch2) or (batch)
                    Variable(torch.ones(args.batch_size, args.z_size)))
     noise.data.normal_(0, 1)
 
-#    batch_C = to_gpu(args.cuda, Variable(batch2[0]))
+    fake_hidden = gan_gen(batch_C)
+    errD_fake, y2 = gan_disc(fake_hidden.detach(), batch_C)
+    errD_fake.backward(mone)
 
-    #print type(noise), len(noise), len(noise[0])
-    #print type(batch_C), len(batch_C), len(batch_C[0])
-
-    # loss / backprop
-    #print type(noise), len(noise), len(noise[0])
-
-    fake_hidden = gan_gen(batch_C)###(batch_C)####(noise)
-    errD_fake, y2 = gan_disc(fake_hidden.detach(), batch_C)## (fake_hidden.detach()) or (fake_hidden.detach(), batch_C)
-    errD_fake.backward(mone)####(mone) or (mone, retain_graph=True)
-
-
-########## l1 loss
-    #err_l = torch.mean(torch.abs(fake_hidden - real_hidden_l))
-    #err_l.backward( )
-##########
 
     # `clip_grad_norm` to prvent exploding gradient problem in RNNs / LSTMs
     torch.nn.utils.clip_grad_norm(autoencoder.parameters(), args.clip)
@@ -589,7 +553,7 @@ mone = one * -1
 best_ppl = None
 impatience = 0
 all_ppl = []
-for epoch in range(1, args.epochs+1):      ##################### number of epoches
+for epoch in range(1, args.epochs+1):     
     # update gan training schedule
     if epoch in gan_schedule:
         niter_gan += 1
@@ -631,13 +595,9 @@ for epoch in range(1, args.epochs+1):      ##################### number of epoch
 		point = random.randint(0, len(train_data)-1)
                 errG = train_gan_g(train_data[point], train_c[point])#####(train_c[point]) or ()
 
-            # train generator
-            #for i in range(args.niters_gan_l):
-		#point = random.randint(0, len(train_data)-1)
-                #errl = train_gan_l(train_data[point], train_c[point])#####(train_c[point]) or ()
 
         niter_global += 1
-        if niter_global % 100 == 0:    ######## 100 ->10
+        if niter_global % 100 == 0: 
             print('[%d/%d][%d/%d] Loss_D: %.8f (Loss_D_real: %.8f '
                   'Loss_D_fake: %.8f) Loss_G: %.8f'
                   % (epoch, args.epochs, niter, len(train_data),
@@ -739,4 +699,4 @@ for epoch in range(1, args.epochs+1):      ##################### number of epoch
 #                sys.exit()
 
     # shuffle between epochs
-    train_data = batchify(corpus.train, args.batch_size, shuffle=False) ###shuffle=true -> false
+    train_data = batchify(corpus.train, args.batch_size, shuffle=False) 
