@@ -120,8 +120,8 @@ class Corpus(object):
 
 
 def batchify(data, bsz, shuffle=False, gpu=False):
-    if shuffle:
-        random.shuffle(data)
+    #if shuffle:
+    #    random.shuffle(data)
     nbatch = len(data) // bsz
     batches = []
 
@@ -157,8 +157,8 @@ def batchify(data, bsz, shuffle=False, gpu=False):
     return batches
 
 def batchify_C(data, bsz, shuffle=False, gpu=False):
-    if shuffle:
-        random.shuffle(data)
+    #if shuffle:
+    #    random.shuffle(data)
     nbatch = len(data) // bsz
     batches = []
 
