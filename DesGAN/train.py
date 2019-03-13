@@ -161,22 +161,17 @@ with open("./output/{}/logs.txt".format(args.outf), 'w') as f:
     f.write("\n\n")
 
 eval_batch_size = 10
-test_data = batchify(corpus.test, eval_batch_size, shuffle=False)
-train_data = batchify(corpus.train, args.batch_size, shuffle=False)
-
 
 #load conditonal information
 test_C = np.load('data/test_weight-YAGO.npy')
 train_C = np.load('data/train_weight-YAGO.npy')
 
-#test_ol = np.load('test_weight-all.npy')#('test_weight-all.npy')
-
 test_C = preprocessing.normalize(test_C, norm='l2')
 train_C = preprocessing.normalize(train_C, norm='l2')
 
-test_c = batchify_C(test_C, eval_batch_size, shuffle=False)
-train_c = batchify_C(train_C, args.batch_size, shuffle=False)
-test_final = batchify_C(test_C, len(test_C), shuffle=False)
+test_data, test_c = batchify_C(corpus.test, test_C, eval_batch_size, shuffle=False)
+train_data, train_c  = batchify_C(corpus.train, train_C, args.batch_size, shuffle=False)
+test_final = batchify(test_C, len(test_C), shuffle=False)
 
 print("Loaded data!")
 
@@ -588,13 +583,12 @@ for epoch in range(1, args.epochs+1):
                 # feed a seen sample within this epoch; good for early training
 		point = random.randint(0, len(train_data)-1)
                 errD, errD_real, errD_fake = \
-                    train_gan_d(train_data[point], train_c[point])#####(train_data[point], train_c[point]) or (train_data[point])
-
+                    train_gan_d(train_data[point], train_c[point])
+		
             # train generator
             for i in range(args.niters_gan_g):
 		point = random.randint(0, len(train_data)-1)
-                errG = train_gan_g(train_data[point], train_c[point])#####(train_c[point]) or ()
-
+                errG = train_gan_g(train_data[point], train_c[point])
 
         niter_global += 1
         if niter_global % 100 == 0: 
@@ -671,10 +665,10 @@ for epoch in range(1, args.epochs+1):
         f.write('\n')
 
     evaluate_generator(fixed_noise, "end_of_epoch_{}".format(epoch))
-    if not args.no_earlystopping and epoch >= args.min_epochs: ############ +8 man ezafe kardam
+    if not args.no_earlystopping and epoch >= args.min_epochs: 
         ppl = train_lm(test_final, eval_path=os.path.join(args.data_path, "test.txt"),
                        save_path="./output/{}/end_of_epoch{}_lm_generations".
-                                 format(args.outf, epoch))######(test_final, eval_path=os.path.join(args.data_path, "test.txt"),save_path="./output/{}/end_of_epoch{}_lm_generations".format(args.outf, epoch)) or (eval_path=os.path.join(args.data_path, "test.txt"),save_path="./output/{}/end_of_epoch{}_lm_generations".format(args.outf, epoch))
+                                 format(args.outf, epoch))
         print("Perplexity {}".format(ppl))
         all_ppl.append(ppl)
         print(all_ppl)
