@@ -156,35 +156,58 @@ def batchify(data, bsz, shuffle=False, gpu=False):
 
     return batches
 
-def batchify_C(data, bsz, shuffle=False, gpu=False):
+
+def batchify_C(data, condition, bsz, shuffle=False, gpu=False):
     #if shuffle:
     #    random.shuffle(data)
     nbatch = len(data) // bsz
     batches = []
+    cond_batch = []
+
 
     for i in range(nbatch):
         # Pad batches to maximum sequence length in batch
         batch = data[i*bsz:(i+1)*bsz]
+	    cond = condition[i*bsz:(i+1)*bsz]
         # subtract 1 from lengths b/c includes BOTH starts & end symbols
         lengths = [len(x)-1 for x in batch]
+        lengths_cond = [len(x) for x in cond]
         # sort items by length (decreasing)
-        batch, lengths = length_sort(batch, lengths)
+        batch, lengths, cond = length_sort_c(batch, lengths, cond)
 
         # source has no end symbol
-        source = [x[:-1] for x in batch]
+        source = [x[1:-1] for x in batch]
         # target has no start symbol
-        target = [x[1:] for x in batch]
+        target = [x[1:-1] for x in batch]
 
-        source = torch.FloatTensor(np.array(source))
-        target = torch.FloatTensor(np.array(target)).view(-1)
+        # source has no end symbol
+        source_cond = [x[1:-1] for x in cond]
+        # target has no start symbol
+        target_cond = [x[1:-1] for x in cond]
 
+
+        # find length to pad to
+        maxlen = max(lengths)
+        for x, y in zip(source, target):
+            zeros = (maxlen-len(x))*[0]
+            x += zeros
+            y += zeros
+
+        source_cond = torch.LongTensor(np.array(source_cond))
+        target_cond = torch.LongTensor(np.array(target_cond)).view(-1)
+        source = torch.LongTensor(np.array(source))
+        target = torch.LongTensor(np.array(target)).view(-1)
+ 
         if gpu:
+            source_cond = source_cond.cuda()
+            target_cond = target_cond.cuda()
             source = source.cuda()
             target = target.cuda()
 
+	    cond_batch.append((source_cond, target_cond, lengths_cond))
         batches.append((source, target, lengths))
 
-    return batches
+    return batches, cond_batch
 
 
 def length_sort(items, lengths, descending=True):
@@ -193,6 +216,14 @@ def length_sort(items, lengths, descending=True):
     items.sort(key=lambda x: x[1], reverse=True)
     items, lengths = zip(*items)
     return list(items), list(lengths)
+
+def length_sort_c(items, lengths, cond, descending=True):
+    """In order to use pytorch variable length sequence package"""
+    items = list(zip(items, lengths, cond))
+    items.sort(key=lambda x: x[1], reverse=True)
+    items, lengths, cond = zip(*items)
+    return list(items), list(lengths), list(cond)
+
 
 
 def train_ngram_lm(kenlm_path, data_path, output_path, N):
