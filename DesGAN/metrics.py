@@ -73,12 +73,12 @@ if __name__ == '__main__':
         #logging.basicConfig(level=logging.INFO)
         #logger = logging.getLogger('Computing Metrics:')
 	#args = parser.parse_args()
-	refer = "snli_lm/test.txt"##"output/example/end_of_epoch13_lm_generations.txt"###"snli_lm/test.txt"
+	refer = "data/test.txt"
 	
 	for i in range(44):
 		i+= 6
 		hypo = "output/example/end_of_epoch"+str(i)+"_lm_generations.txt"
-		ref = "snli_lm/test.txt"##"output/example/end_of_epoch13_lm_generations.txt"###"snli_lm/test.txt"
+		ref = "data/test.txt"
 		ref = read_file(ref)
 		hypo = read_file(hypo, type ="h")
 
