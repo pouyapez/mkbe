@@ -21,7 +21,7 @@ class MLP_D(nn.Module):
         self.layers = []
 
         for i in range(len(layer_sizes)-1):
-	    if i==0: ## kolan in sharto ezafe kardam
+	    if i==0: 
                 layer = nn.Linear(layer_sizes[i]+199, layer_sizes[i+1])
 	    else:
             	layer = nn.Linear(layer_sizes[i], layer_sizes[i+1])
