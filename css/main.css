@@ -4,7 +4,7 @@ html, body {
   padding: 0;
   background-color: white;
   font-family: Verdana, Geneva, sans-serif;
-  min-width: 800px;
+  min-width: 940px;
 }
 
 a {
@@ -25,7 +25,7 @@ a {
 .menu {
   position: relative;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 940px;
 }
 
 .menu-table {
