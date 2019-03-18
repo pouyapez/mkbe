@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+<head>
+   <script>
+     function myupdate() {
+     
+      list = ["malesport","malecelebrity","malepolitician","femalesport","femalecelebrity","femalepolitician"];
+        
+      if (document.getElementById('male').checked) {
+      gender_value = document.getElementById('male').value;
+      }
+      if (document.getElementById('female').checked) {
+      gender_value = document.getElementById('female').value;
+      }
+      if (document.getElementById('celebrity').checked) {
+      occ_value = document.getElementById('celebrity').value;
+      }
+      if (document.getElementById('sport').checked) {
+      occ_value = document.getElementById('sport').value;
+      }
+      if (document.getElementById('politician').checked) {
+      occ_value = document.getElementById('politician').value;
+      }
+
+      ov_value = gender_value.concat(occ_value);
+      
+      for (x in list) {
+      if (ov_value!=list[x]){
+         document.getElementById("image_".concat(list[x])).style.display = "none";
+         document.getElementById("text_".concat(list[x])).style.display = "none";
+      }
+         else{
+          document.getElementById("image_".concat(list[x])).style.display = "";
+          document.getElementById("text_".concat(list[x])).style.display = "";  
+         }
+      }
+
+    }
+      
+    function myupdate_movie() {
+     
+      list = ["action1","drama1","action5","drama5","comedy1","comedy5"];
+        
+      if (document.getElementById('action').checked) {
+      genre_value = document.getElementById('action').value;
+      }
+      if (document.getElementById('drama').checked) {
+      genre_value = document.getElementById('drama').value;
+      }
+      if (document.getElementById('comedy').checked) {
+      genre_value = document.getElementById('comedy').value;
+      }
+      if (document.getElementById('1').checked) {
+      date_value = document.getElementById('1').value;
+      }
+      if (document.getElementById('5').checked) {
+      date_value = document.getElementById('5').value;
+      }
+
+      ov_value = genre_value.concat(date_value);
+      
+      for (x in list) {
+      if (ov_value!=list[x]){
+         document.getElementById("text_".concat(list[x])).style.display = "none";
+      }
+         else{
+          document.getElementById("text_".concat(list[x])).style.display = "";  
+         }
+      }
+
+    }
+   function mytest() {
+           alert("Hello world!");
+   }
+  </script>
+   
+  <title>MKBE</title>
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+  <link href="css/main.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href="css/index.css" media="screen" rel="stylesheet" type="text/css"/>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Raleway:400,600,700' rel='stylesheet' type='text/css'>
+   
+</head>
+<body>
+<div class="menu-container noselect">
+  <div class="menu">
+    <table class="menu-table">
+      <tr>
+        <td>
+          <div class="logo">
+            <a href="javascript:void(0)">Embedding Multimodal Relational Data for Knowledge Base Completion</a>
+          </div>
+        </td>
+        <td>
+          <div class="menu-items">
+            <br>
+            <a href="javascript:void(0)" class="menu-highlight">Overview</a>
+            <a href="https://arxiv.org/abs/1809.01341">arXiv</a>
+            <a target="_blank" href="https://github.com/pouyapez/mkbe">GitHub</a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="content-container">
+  <div class="content">
+    <table class="content-table">
+      <tr>
+        <td>
+          <img class="left-align image noselect" src="img/graph.png" width="420">
+        </td>
+        <td>
+          <p class="text text-large add-top-margin" style="margin-left: 80px;">
+            <a target="_blank" href="javascript:void(0)">Pouya Pezeshkpour</a>, 
+            <a target="_blank" href="javascript:void(0)">Liyan Chen</a>, 
+            <a target="_blank" href="javascript:void(0)">Sameer Singh</a><br> 
+            [pezeshkp, liyanc, sameer] (at) uci.edu
+          </p>
+        </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+          <div class="row">
+          <div class="col-lg-12">
+          <p class="text" align="justify">
+            Knowledge bases (KB) are an essential part of many computational systems with applications in search,
+            structured data management, recommendations, question answering, and information retrieval. However, KBs 
+            often suffer from incompleteness, noise in their entries, and inefficient inference under uncertainty. To 
+            address these issues learning relational KBs by representing entities and relations in an embedding space has 
+            been a focus of active research. Nevertheless, Knowledge bases in the real-world, contain a wide variety of data 
+            types such as text, images, and numerical values which are being ignored by current methodology. We propose 
+            multimodal knowledge base embeddings (MKBE) that use different neural encoders for this variety of observed 
+            data, and combine them with existing relational models to learn embeddings of the entities and multimodal data. 
+            Further, using these learned embedings and different neural decoders, we introduce a novel multimodal imputation 
+            model to generate missing multimodal values, like text and images, from information in the knowledge base.
+          </p>
+          </div> 
+          </div> 
+         </td>
+      </tr>
+      <tr>
+        <td width="10%">
+          <p class="text left-align badge-text">Method</p>
+        </td>
+        <td width="50%">
+          <div class="button-group noselect right-align">
+            <img class="left-align image noselect" src="img/overall-net.png" width="700">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <p class="text" align="justify">
+            To incorporate such multimodal objects into the existing relational models like DistMult and ConvE, we propose 
+            to learn embeddings for these types of data as well. We utilize recent advances in deep learning to construct 
+            encoders for these objects to represent them, essentially providing an embedding for any object value. The overall 
+            goal remains the same: the model needs to utilize all the observed subjects, objects, and relations, across 
+            different data types, in order to estimate whether any fact holds. We present an example of an instantiation of 
+            MKBE for a knowledge base containing YAGO entities at the beginning of this overview. For any triple, we embed 
+            the subject (Carles Puyol) and the relation (such as playsFor, wasBornOn, or playsFor) using a direct lookup. For 
+            the object, depending on the domain (indexed, string, numerical, or image, respectively), we use appropriate encoders 
+            to compute its embedding. Via these neural encoders, the model can use the information content of multimodal objects to 
+            predict missing links, however, learning embeddings for objects in M (multimodal attributes) is not sufficient to generate missing 
+            multimodal values, i.e. < s, r, ? > where the object is in M. Consequently, we introduce a set 
+            of neural decoders that use entity embeddings to generate multimodal values. An outline of our model for imputing 
+            missing values is depicted in the above figure.   
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h2 class="add-top-margin" align="justify">Link Prediction</h2>
+          <hr>
+          <p class="text">
+            we evaluate the capability of MKBE in the link prediction task. The goal is to calculate MRR and Hits@ metric 
+            (ranking evaluations) of recovering the missing entities from triples in the test dataset, performed by ranking 
+            all the entities and computing the rank of the correct entity. Similar to previous work, here we focus on 
+            providing the results in a filtered setting, that is we only rank triples in the test data against the ones that 
+            never appear in either train or test datasets. The result of link prediction task on the extended YAGO-10 (we enrich YAGO-10 by adding numerical, text and images into dataset) 
+            is provided in the table.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div class="middle-align">
+            <img class="image noselect" src="img/link_p.png" width="430">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h2 class="add-top-margin">Imputing Multimodal Attributes</h2>
+          <hr>
+          <p class="text"  align="justify">
+            Here we describe the decoders we use to generate multimodal values for entities from their embeddings. 
+            The multimodal imputing model is shown on the right side of our network figure, which uses different neural 
+            decoders to generate missing attributes (more details are provided in supplementary materials). 
+            To recover the missing numerical and categorical data such as dates, gender, and occupation, we use a simple 
+            feed-forward network on the entity embedding to predict the missing attributes. These decoders are trained with 
+            embeddings from encoders part, with appropriate losses (RMSE for numerical and cross-entropy for categories). 
+            Along the same line, for generating grammatical and linguistically coherent sentences and meaningful images we 
+            use generative adversarial networks condition on entity embedding from the previous section. Some generated 
+            samples is presented below.
+          </p>
+      </tr>
+      <tr> 
+        <td>
+          <div class="left-align">
+            <img class="image noselect" src="img/text_g.png" width="500">
+          </div>
+        </td>
+        <td>
+          <div class="right-align">
+            <img class="image noselect" src="img/image_g.png" width="500">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <h2 class="add-top-margin">YAGO Demo</h2>
+          <hr>
+          <p class="text"  align="justify">
+            Here we study generating missing attributes from knowleddge graph representation. Accordingly, we consider an imagineray 
+            entity with only two relations, the occupation and gender. Then using learned embeddings of graph, we calculate the embedding
+            of this entity and using this embedding as conditional information we generate a discription and an imager for the entity.
+          </p>
+                 <p>Please select the links:</p>
+   <form>
+      <div class="left-align">
+          <input type="radio" id="sport" name="occ" value="sport" onClick="myupdate();" checked />
+                Sportsperson <br> 
+          <input type="radio" id="celebrity" name="occ" value="celebrity" onClick="myupdate();"/>
+                Celebrity <br> 
+           <input type="radio" id="politician" name="occ" value="politician" onClick="myupdate();"/>
+                Politician
+       </div>
+      <div class="middle-align">
+          <input type="radio" id="male" name="gender" value="male" onClick="myupdate();" checked />
+                Has gender male <br> 
+          <input type="radio" id="female" name="gender" value="female" onClick="myupdate();"/>
+                Has gender female
+      </div>
+   </form>
+         
+       </tr>
+       <tr>
+        <td>
+         <div class="left-align">
+            <img id="image_femalesport" src="img/f-sp.png" width="200" style="display: none;" align="left">
+            <img id="image_femalepolitician" src="img/f-pol.png" width="200" style="display: none;" align="left">
+            <img id="image_femalecelebrity" src="img/f-celeb.png" width="200" style="display: none;" align="left">
+            <img id="image_malesport" src="img/m-sp.png" width="200" align="left">
+            <img id="image_malepolitician" src="img/m-pol.png" width="200" style="display: none;" align="left">
+            <img id="image_malecelebrity" src="img/m-celeb.png" width="200" style="display: none;" align="left">
+         </div>
+        </td>
+        <td>  
+         <div class="right-align" id="text_femalesport" style="display: none;">
+           subject was a retired football team Finland back.
+         </div>
+         <div class="right-align" id="text_femalepolitician" style="display: none;">
+           subject (born November 17, 1963) is an American actor, director, and film director.
+         </div>
+          <div class="right-align" id="text_femalecelebrity" style="display: none;">
+            subject <oov> is an Indian model with <oov> Cohen. 
+         </div>
+         <div class="right-align" id="text_malesport">
+            subject (born 4 August 1986) is a Polish footballer who plays for GKS Academical. 
+         </div>
+         <div class="right-align" id="text_malepolitician" style="display: none;">
+           subject (born February 4, 1975) is a playwright, singer-songwriter, May, musician, who was Prime Minister of <oov> at 2009 until the early Welsh Party.
+         </div>
+         <div class="right-align" id="text_malecelebrity" style="display: none;">
+            subject (14 (19 1944) is a 1989 British author for Charles Golden <oov> and historical emperor O.
+         </div>
+        </td>
+       </tr>
+       
+   <tr>
+    <td colspan="2">     
+     <h2 class="add-top-margin">MoviLens Demo</h2>
+          <hr>
+          <p class="text"  align="justify">
+            Similar to previous section, here we consider an imagineray 
+            movie with only two relations, the genre and release date. Then using learned embeddings of graph, we calculate the embedding
+            of this entity and using this embedding as conditional information we generate a title for this movie.
+          </p>
+                 <p>Please select the links:</p>
+   <form>
+      <div class="left-align">
+          <input type="radio" id="action" name="genre" value="action" onClick="myupdate_movie();" checked />
+                Action <br> 
+          <input type="radio" id="drama" name="genre" value="drama" onClick="myupdate_movie();"/>
+                Drama <br> 
+           <input type="radio" id="comedy" name="genre" value="comedy" onClick="myupdate_movie();"/>
+                Comedy
+       </div>
+      <div class="middle-align">
+          <input type="radio" id="5" name="rate" value="5" onClick="myupdate_movie();" checked />
+                Has rating 5 <br> 
+          <input type="radio" id="1" name="rate" value="1" onClick="myupdate_movie();"/>
+                Has rating 1
+      </div>
+   </form>
+         
+       </tr>
+       <tr>
+        <td>  
+         <div class="right-align" id="text_action1" style="display: none;">
+           Assassination of the Videotape
+         </div>
+         <div class="right-align" id="text_drama1" style="display: none;">
+           The Tin and the Langoliers
+         </div>
+          <div class="right-align" id="text_comedy1" style="display: none;">
+            Dracula Evil Story 
+         </div>
+         <div class="right-align" id="text_action5">
+            Double Game
+         </div>
+         <div class="right-align" id="text_comedy5" style="display: none;">
+           Nixon World
+         </div>
+         <div class="right-align" id="text_drama5" style="display: none;">
+            Blood Measures
+         </div>
+        </td>
+       </tr>         
+       
+
+      <tr>
+        <td colspan="2">
+          <h2 class="add-top-margin">Conclusion</h2>
+          <hr>
+          <p class="text"  align="justify">
+            Motivated by the need to utilize multiple sources of information, such as text and images, to achieve more 
+            accurate link prediction, we present a novel neural approach to multimodal relational learning. 
+            We introduce MKBE, a link prediction model that consists of (1)~a compositional encoding component to jointly 
+            learn the entity and multimodal embeddings to encode the information available for each entity, and 
+            (2)~adversarially trained decoding component that use these entity embeddings to impute missing multimodal values.
+            We enrich two existing datasets, YAGO-10 and MovieLens-100k, with multimodal information to introduce benchmarks. 
+            We show that MKBE, in comparison to existing link predictors DistMult and ConvE, can achieve higher accuracy on 
+            link prediction by utilizing the multimodal evidence. Further, we show that MKBE effectively incorporates 
+            relational information to generate high-quality multimodal attributes like images and text. 
+          </p>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>
