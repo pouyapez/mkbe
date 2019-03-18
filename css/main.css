@@ -79,7 +79,7 @@ a {
 .content-container {
   z-index: 1;
   position: relative;
-  width: 90%;
+  width: 100%;
 }
 
 .content {
@@ -106,7 +106,7 @@ a {
 
 .content-table {
   padding: 0px;
-  width: 80%;
+  width: 100%;
   margin: 0;
 }
 
