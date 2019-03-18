@@ -4,7 +4,7 @@ html, body {
   padding: 0;
   background-color: white;
   font-family: Verdana, Geneva, sans-serif;
-  min-width: 940px;
+  min-width: 250px;
 }
 
 a {
@@ -311,7 +311,7 @@ ol.publication.P-list li:before {
   left: 0;
   height: auto;
   width: 100%;
-  min-width: 9400px;
+  min-width: 250px;
 }
 
 .iframe {
