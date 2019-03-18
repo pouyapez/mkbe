@@ -167,6 +167,7 @@ h2 {
 }
 
 .image img {
+  max-width: 500px;
   width: 100%;
   height: auto;
   box-sizing: border-box;
